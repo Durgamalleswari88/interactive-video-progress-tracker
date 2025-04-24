@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Video Progress Tracker</title>
+  <style>
+    /* Base styles */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      color: #ffffff;
+      margin: 0;
+      background-color: #121212; /* Dark background color */
+    }
+
+    /* Heading */
+    h2 {
+      color: #ffffff;
+      font-size: 24px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* Video container */
+    .video-container {
+      background-color: rgba(30, 30, 30, 0.8);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .video-container:hover {
+      transform: scale(1.02);
+    }
+
+    /* Placeholder for video */
+    .placeholder {
+      width: 100%;
+      max-width: 640px;
+      height: 360px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .placeholder:hover {
+      background-color: #555;
+    }
+
+    /* Progress bar container */
+    .progress-bar {
+      width: 100%;
+      max-width: 640px;
+      height: 10px;
+      background-color: #444;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+
+    /* Progress fill */
+    .progress-fill {
+      height: 100%;
+      background-color: #4caf50;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+      border-radius: 5px;
+    }
+
+    /* Buttons */
+    button,
+    input[type="file"] {
+      padding: 12px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      background-color: #2979ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      width: 100%;
+      max-width: 200px;
+      text-align: center;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button:hover,
+    input[type="file"]:hover {
+      background-color: #1c54b2;
+    }
+
+    /* File input styling */
+    input[type="file"] {
+      background-color: #333;
+      border: 1px solid #555;
+      padding: 12px 20px;
+      cursor: pointer;
+    }
+
+    /* Responsive layout */
+    @media (max-width: 768px) {
+      .placeholder,
+      .progress-bar,
+      iframe,
+      video {
+        width: 100%;
+        height: auto;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .video-container {
+        padding: 15px;
+      }
+
+      button,
+      input[type="file"] {
+        font-size: 14px;
+        padding: 10px 15px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Interactive Video Progress Tracker</h2>
+
+  <div class="video-container">
+    <div id="video-box1" class="placeholder">Click Start to Load Video</div>
+    <button onclick="loadPlayer(1)">Start Video 1</button>
+    <div class="progress-bar">
+      <div id="progress-fill1" class="progress-fill"></div>
+    </div>
+    <p>Progress: <span id="progress1">0%</span></p>
+    <button id="resetProgress1">Reset Progress</button>
+  </div>
+
+  <div class="video-container">
+    <div id="video-box2" class="placeholder">Click Start to Load Video</div>
+    <button onclick="loadPlayer(2)">Start Video 2</button>
+    <div class="progress-bar">
+      <div id="progress-fill2" class="progress-fill"></div>
+    </div>
+    <p>Progress: <span id="progress2">0%</span></p>
+    <button id="resetProgress2">Reset Progress</button>
+  </div>
+
+  <div class="video-container">
+    <h3>Upload Your Own Video</h3>
+    <input type="file" accept="video/*" id="uploadVideo">
+    <video id="customVideo" width="640" height="360" controls style="display: none;"></video>
+    <div class="progress-bar">
+      <div id="progress-fill3" class="progress-fill"></div>
+    </div>
+    <p>Progress: <span id="progress3">0%</span></p>
+    <button id="resetProgress3">Reset Progress</button>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
