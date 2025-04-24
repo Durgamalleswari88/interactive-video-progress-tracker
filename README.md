@@ -46,4 +46,31 @@ This project is a web-based system designed "to track and store users video prog
   -->Dependencies:
   
         -YouTube IFrame Player API
+
+  -->How Watched Intervals Are Tracked:
+  
+      The system listens to the video player's timeupdate event and captures the current playback time at regular intervals (every 
+      second). These timestamps are recorded as start and end pairs to create watched intervals, reflecting segments the user has 
+      actually viewed.
+
+ -->Merging Intervals to Get Unique Progress:
+ 
+      To ensure skipping or repeated views don't inflate the progress, the intervals are merged:
+
+      Overlapping or adjacent intervals are combined into a single one.
+
+      This results in a list of unique non-overlapping intervals.
+
+      The total watch time is calculated by summing the lengths of these intervals and comparing it to the total video duration.
+
+  -->Challenges Faced & Solutions:
+  
+      Redundant Interval Tracking: Initially, intervals were overlapping due to frequent timeupdate events. To fix this, we sampled only 
+      every second.
+
+      Accurate Merging Logic: Merging intervals correctly was tricky, especially when there were many small segments. We implemented a 
+      sort-then-merge approach to ensure accuracy.
+
+     Persistent Progress: Tracking user progress across sessions would require backend support or local storage, which can be a future 
+     enhancement.
  
